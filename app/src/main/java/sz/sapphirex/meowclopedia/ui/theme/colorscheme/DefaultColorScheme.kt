@@ -1,0 +1,71 @@
+package sz.sapphirex.meowclopedia.ui.theme.colorscheme
+
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.ui.graphics.Color
+
+val DefaultLightColors = lightColorScheme(
+    primary = Color(0xFF006874),
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFF99F0FF),
+    onPrimaryContainer = Color(0xFF001F24),
+    secondary = Color(0xFF006874),
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = Color(0xFF99F0FF),
+    onSecondaryContainer = Color(0xFF001F24),
+    tertiary = Color(0xFF006685),
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = Color(0xFFBEE9FF),
+    onTertiaryContainer = Color(0xFF001F2A),
+    error = Color(0xFFBA1A1A),
+    errorContainer = Color(0xFFFFDAD6),
+    onError = Color(0xFFFFFFFF),
+    onErrorContainer = Color(0xFF410002),
+    background = Color(0xFFF8FDFF),
+    onBackground = Color(0xFF001F25),
+    surface = Color(0xFFF8FDFF),
+    onSurface = Color(0xFF001F25),
+    surfaceVariant = Color(0xFFDBE4E6),
+    onSurfaceVariant = Color(0xFF3F484A),
+    outline = Color(0xFF6F797B),
+    inverseOnSurface = Color(0xFFD6F6FF),
+    inverseSurface = Color(0xFF00363F),
+    inversePrimary = Color(0xFF4FD8EC),
+    surfaceTint = Color(0xFF006874),
+    outlineVariant = Color(0xFFBFC8CA),
+    scrim = Color(0xFF000000),
+)
+
+val DefaultDarkColors = darkColorScheme(
+    primary = Color(0xFF4FD8EC),
+    onPrimary = Color(0xFF00363D),
+    primaryContainer = Color(0xFF004F58),
+    onPrimaryContainer = Color(0xFF99F0FF),
+    secondary = Color(0xFF4FD8EC),
+    onSecondary = Color(0xFF00363D),
+    secondaryContainer = Color(0xFF004F58),
+    onSecondaryContainer = Color(0xFF99F0FF),
+    tertiary = Color(0xFF6AD3FF),
+    onTertiary = Color(0xFF003546),
+    tertiaryContainer = Color(0xFF004D65),
+    onTertiaryContainer = Color(0xFFBEE9FF),
+    error = Color(0xFFFFB4AB),
+    errorContainer = Color(0xFF93000A),
+    onError = Color(0xFF690005),
+    onErrorContainer = Color(0xFFFFDAD6),
+    background = Color(0xFF001F25),
+    onBackground = Color(0xFFA6EEFF),
+    surface = Color(0xFF001F25),
+    onSurface = Color(0xFFA6EEFF),
+    surfaceVariant = Color(0xFF3F484A),
+    onSurfaceVariant = Color(0xFFBFC8CA),
+    outline = Color(0xFF899294),
+    inverseOnSurface = Color(0xFF001F25),
+    inverseSurface = Color(0xFFA6EEFF),
+    inversePrimary = Color(0xFF006874),
+    surfaceTint = Color(0xFF4FD8EC),
+    outlineVariant = Color(0xFF3F484A),
+    scrim = Color(0xFF000000),
+)
+
+private val seed = Color(0xFF8CEBFB)
