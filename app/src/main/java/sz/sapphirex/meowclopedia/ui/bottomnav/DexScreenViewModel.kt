@@ -8,9 +8,10 @@ import androidx.compose.runtime.State
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import sz.sapphirex.meowclopedia.data.DataHandler
 
 class DexScreenViewModel: ViewModel() {
-    private val firebaseDataHandler = FirebaseDataHandler()
+    private val firebaseDataHandler = DataHandler()
 
     private val _catResult = mutableStateOf<DataResult<List<Cat>>>(DataResult.Loading)
     val catResult: State<DataResult<List<Cat>>> = _catResult

@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import sz.sapphirex.meowclopedia.ui.theme.Mu9MeowclopediaTheme
+import sz.sapphirex.meowclopedia.ui.utils.ThemePreviews
 
 internal val padding = 16.dp
 

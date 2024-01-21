@@ -68,9 +68,6 @@ private fun HomeDescription(meowclopediaAppState: MeowclopediaApp) {
             Icon(imageVector = Icons.Filled.Info, contentDescription = null)
         }
         Spacer(modifier = Modifier.height(8.dp))
-//        ExpandableText(
-//            text = stringResource(id = R.string.home_about_cats)
-//        )
         Text(
             text = stringResource(id = R.string.home_about_cats)
         )

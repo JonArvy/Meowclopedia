@@ -8,9 +8,10 @@ import androidx.compose.runtime.State
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import sz.sapphirex.meowclopedia.data.DataHandler
 
 class CatTriviaScreenViewModel: ViewModel() {
-    private val firebaseDataHandler = FirebaseDataHandler()
+    private val firebaseDataHandler = DataHandler()
 
     private val _catTriviaResult = mutableStateOf<DataResult<List<CatTrivia>>>(DataResult.Loading)
     val catTriviaResult: State<DataResult<List<CatTrivia>>> = _catTriviaResult
