@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import sz.sapphirex.meowclopedia.MeowclopediaApp
 import sz.sapphirex.meowclopedia.R
 import sz.sapphirex.meowclopedia.ui.composables.carousel.Carousel
+import sz.sapphirex.meowclopedia.ui.composables.labels.ExpandableText
 import sz.sapphirex.meowclopedia.ui.composables.labels.TitleText
 
 @Composable
@@ -70,12 +71,12 @@ private fun HomeDescription() {
             Icon(imageVector = Icons.Filled.Info, contentDescription = null)
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
+        ExpandableText(
             text = stringResource(id = R.string.home_about_cats)
         )
         Spacer(modifier = Modifier.height(8.dp))
         TitleText(text = stringResource(id = R.string.home_origin_and_history_of_cats_title))
-        Text(text = stringResource(id = R.string.home_origin_cats))
+        ExpandableText(text = stringResource(id = R.string.home_origin_cats))
     }
 }
 
