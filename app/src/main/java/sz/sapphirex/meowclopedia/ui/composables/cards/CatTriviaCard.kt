@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import sz.sapphirex.meowclopedia.ui.Screen
+import sz.sapphirex.meowclopedia.data.models.CatTrivia
 
 @Composable
-fun CatTriviaCard(catTrivia: Screen.CatTrivia) {
+fun CatTriviaCard(catTrivia: CatTrivia) {
     Surface(
         modifier = Modifier
             .padding(8.dp)

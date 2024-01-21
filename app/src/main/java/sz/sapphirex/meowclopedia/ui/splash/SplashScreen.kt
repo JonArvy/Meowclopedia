@@ -12,6 +12,10 @@ import sz.sapphirex.meowclopedia.R
 @Composable
 fun SplashScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(painter = painterResource(id = R.drawable.splash_02), contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        Image(
+            painter = painterResource(id = R.drawable.splash_02),
+            contentDescription = null, modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
     }
 }
