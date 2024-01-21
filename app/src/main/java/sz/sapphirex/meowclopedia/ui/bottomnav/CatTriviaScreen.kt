@@ -1,5 +1,6 @@
 package sz.sapphirex.meowclopedia.ui.bottomnav
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,9 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import sz.sapphirex.meowclopedia.MeowclopediaApp
+import sz.sapphirex.meowclopedia.R
 import sz.sapphirex.meowclopedia.data.DataResult
 import sz.sapphirex.meowclopedia.data.models.CatTrivia
 import sz.sapphirex.meowclopedia.ui.composables.cards.CatTriviaCard
@@ -24,11 +28,12 @@ import sz.sapphirex.meowclopedia.ui.composables.labels.TitleText
 import sz.sapphirex.meowclopedia.ui.composables.skeleton.TriviaCardSkeleton
 
 @Composable
-fun CatTriviaScreen(
-    meowclopediaAppState: MeowclopediaApp,
-    catTriviaScreenViewModel: CatTriviaScreenViewModel = viewModel()
-) {
+fun CatTriviaScreen() {
+    val catTriviaScreenViewModel: CatTriviaScreenViewModel = viewModel()
+    catTriviaScreenViewModel.fetchCats()
     Box(modifier = Modifier.fillMaxSize()) {
+
+        Image(painter = painterResource(id = R.drawable.splash_02), contentDescription = null, contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -51,7 +56,7 @@ private fun CatTriviaScreenTopBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        TitleText(text = "Cat Trivia")
+        TitleText(text = stringResource(id = R.string.trivia_title))
     }
 }
 
@@ -79,7 +84,7 @@ fun CatTriviaScreenList(viewModel: CatTriviaScreenViewModel) {
                 modifier = Modifier.padding(horizontal = 8.dp)
             ) {
                 val trivia = (0..10).toList()
-                trivia.forEach { i ->
+                trivia.forEach { _ ->
                     item { TriviaCardSkeleton() }
                 }
             }

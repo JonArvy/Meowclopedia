@@ -1,5 +1,6 @@
 package sz.sapphirex.meowclopedia.ui.composables.labels
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -85,6 +86,8 @@ fun ExpandableText(
     }
 }
 
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.noRippleClickable(enabled: Boolean = true, onClick: () -> Unit): Modifier = composed {
     clickable(
         enabled = enabled,

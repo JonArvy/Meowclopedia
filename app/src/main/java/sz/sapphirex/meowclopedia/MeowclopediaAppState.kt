@@ -1,5 +1,12 @@
 package sz.sapphirex.meowclopedia
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import sz.sapphirex.meowclopedia.data.models.Cat
+import sz.sapphirex.meowclopedia.ui.Routes
+
 @Composable
 fun rememberMeowclopediaAppState(
     navController: NavHostController = rememberNavController(),
@@ -8,21 +15,19 @@ fun rememberMeowclopediaAppState(
 }
 
 class MeowclopediaApp(val navController: NavHostController) {
-    val currentRoute: String?
+    private val currentRoute: String?
         get() = navController.currentDestination?.route
+
+    var catListReference: List<Cat> = emptyList()
 
     var homeImageList: List<String> = emptyList()
         private set
 
-    private var isGrid = false
-    private var searchToken: String = ""
+    var searchToken: String = ""
+        private set
 
     fun setHomeImageList(imageList: List<String>) {
         homeImageList = imageList
-    }
-
-    fun getSearchToken(): String {
-        return searchToken
     }
 
     fun setSearchToken(token: String) {
@@ -37,14 +42,6 @@ class MeowclopediaApp(val navController: NavHostController) {
         val catRoute = "${Routes.CAT_INFO_ROUTE}/$catId"
         if (currentRoute != "${Routes.CAT_INFO_ROUTE}/{catId}") {
             navController.navigate(catRoute)
-        }
-    }
-
-    fun navigateToWebView(url: String) {
-        val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
-        val webRoute = "${Routes.WEB_VIEW_ROUTE}/$encodedUrl"
-        if (currentRoute != "${Routes.WEB_VIEW_ROUTE}/{webURL}") {
-            navController.navigate(webRoute)
         }
     }
 }

@@ -18,9 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
-import sz.sapphirex.meowclopedia.MeowclopediaApp
 import sz.sapphirex.meowclopedia.R
 import sz.sapphirex.meowclopedia.data.changeColorScheme
 import sz.sapphirex.meowclopedia.data.changeTheme
@@ -30,7 +30,7 @@ import sz.sapphirex.meowclopedia.ui.composables.list.ClickableListItem
 import sz.sapphirex.meowclopedia.ui.composables.modals.ChoiceModal
 
 @Composable
-fun MoreScreen(meowclopediaAppState: MeowclopediaApp) {
+fun MoreScreen() {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -47,8 +47,8 @@ fun MoreScreen(meowclopediaAppState: MeowclopediaApp) {
 
         // Change color scheme
         ClickableListItem(
-            title = "Change Color Scheme",
-            subtitle = "Change color scheme for a new look",
+            title = stringResource(id = R.string.more_change_color_scheme_title),
+            subtitle = stringResource(id = R.string.more_change_color_scheme_subtitle),
             icon = { Icon(painter = painterResource(id = R.drawable.outline_color_lens_24), contentDescription = null)},
             onClick = {
                 colorSchemeModalVisible = true
@@ -56,12 +56,12 @@ fun MoreScreen(meowclopediaAppState: MeowclopediaApp) {
         )
         if (colorSchemeModalVisible) {
             val choices: List<Pair<String, Int>> = listOf(
-                Pair("Default", 0),
-                Pair("Green", 1),
-                Pair("Lavender", 2),
+                Pair(stringResource(id = R.string.more_choice_default), 0),
+                Pair(stringResource(id = R.string.more_choice_green), 1),
+                Pair(stringResource(id = R.string.more_choice_lavender), 2),
             )
             ChoiceModal(
-                title = "Color Scheme",
+                title = stringResource(id = R.string.more_change_color_scheme_title),
                 onDismissRequest = { colorSchemeModalVisible = false },
                 choices = choices,
                 defaultSelectedValue = colorSchemePreferences
@@ -75,8 +75,8 @@ fun MoreScreen(meowclopediaAppState: MeowclopediaApp) {
 
         // Change Dark Mode
         ClickableListItem(
-            title = "Change Mode",
-            subtitle = "Choose between light mode and dark mode",
+            title = stringResource(id = R.string.more_change_mode_title),
+            subtitle = stringResource(id = R.string.more_change_mode_subtitle),
             icon = { Icon(painter = painterResource(id = R.drawable.outline_dark_mode_24), contentDescription = null)},
             onClick = {
                 themeModalVisible = true
@@ -84,12 +84,12 @@ fun MoreScreen(meowclopediaAppState: MeowclopediaApp) {
         )
         if (themeModalVisible) {
             val choices: List<Pair<String, Int>> = listOf(
-                Pair("System", 0),
-                Pair("Light", 1),
-                Pair("Night", 2),
+                Pair(stringResource(id = R.string.more_choice_system), 0),
+                Pair(stringResource(id = R.string.more_choice_light), 1),
+                Pair(stringResource(id = R.string.more_choice_dark), 2),
             )
             ChoiceModal(
-                title = "Change Settings",
+                title = stringResource(id = R.string.more_change_mode_title),
                 onDismissRequest = { themeModalVisible = false },
                 choices = choices,
                 defaultSelectedValue = themePreference

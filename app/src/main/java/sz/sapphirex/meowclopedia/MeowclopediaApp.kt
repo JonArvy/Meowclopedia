@@ -1,40 +1,39 @@
 package sz.sapphirex.meowclopedia
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import sz.sapphirex.meowclopedia.data.catImages
+import sz.sapphirex.meowclopedia.ui.Routes
+import sz.sapphirex.meowclopedia.ui.Screen
+import sz.sapphirex.meowclopedia.ui.bottomNavScreenDestinations
+import sz.sapphirex.meowclopedia.ui.mainDestinations
+import sz.sapphirex.meowclopedia.ui.theme.Mu9MeowclopediaTheme
 
 @Composable
-fun MeowclopediaApp(
-    meowclopediaAppViewModel: MeowclopediaAppViewModel = viewModel()
-) {
+fun MeowclopediaApp() {
     Mu9MeowclopediaTheme {
-        val meowclopediaState by meowclopediaAppViewModel.meowclopediaResult
         val meowclopediaAppState = rememberMeowclopediaAppState()
-        var splashScreenVisible by remember { mutableStateOf(true) }
-        AnimatedVisibility(visible = splashScreenVisible) {
-            SplashScreen()
-        }
-        when (meowclopediaState) {
-            is DataResult.Loading -> splashScreenVisible = false
-            is DataResult.Error -> {}
-            is DataResult.Success -> {
-                splashScreenVisible = false
-                val initialStatePairs = (meowclopediaState as DataResult.Success<Pair<Meowclopedia, Images>>).data
-                val isMaintenance = initialStatePairs.first.maintenance
-                val imageList = initialStatePairs.second.homeBanner
-                meowclopediaAppState.setHomeImageList(imageList)
-                AnimatedVisibility(visible = isMaintenance) {
-                    MeowclopediaWebView(initialStatePairs.first.websiteLink)
-                }
-                AnimatedVisibility(visible = !isMaintenance) {
-                    NavHost(
-                        navController = meowclopediaAppState.navController,
-                        startDestination = Routes.BOTTOM_NAV_ROUTE
-                    ) {
-                        mainDestinations(meowclopediaAppState)
-                    }
-                }
-            }
+
+        meowclopediaAppState.setHomeImageList(catImages.catImages)
+        NavHost(
+            navController = meowclopediaAppState.navController,
+            startDestination = Routes.BOTTOM_NAV_ROUTE
+        ) {
+            mainDestinations(meowclopediaAppState)
         }
     }
 }
@@ -44,7 +43,6 @@ fun BottomNavComposable(meowclopediaAppState: MeowclopediaApp) {
     val navController = rememberNavController()
     val screenList = listOf(Screen.Home, Screen.Dex, Screen.CatTrivia, Screen.More)
     Scaffold(
-        topBar = {},
         bottomBar = { BottomNavBar(navController, screenList) }
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = Screen.Home.route, modifier = Modifier.padding(paddingValues)) {

@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ fun HomeScreen(meowclopediaAppState: MeowclopediaApp) {
     Scaffold(
         topBar = { HomeTopBar() }
     ) { paddingValues ->
+        Image(painter = painterResource(id = R.drawable.splash_02), contentDescription = null, contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
         LazyColumn(
             Modifier
                 .fillMaxSize()
@@ -38,7 +40,7 @@ fun HomeScreen(meowclopediaAppState: MeowclopediaApp) {
         ) {
             item { Spacer(modifier = Modifier.height(16.dp)) }
             item { HomeCarousel(meowclopediaAppState) }
-            item { HomeDescription(meowclopediaAppState) }
+            item { HomeDescription() }
         }
     }
 }
@@ -55,7 +57,7 @@ fun HomeTopBar() {
 }
 
 @Composable
-private fun HomeDescription(meowclopediaAppState: MeowclopediaApp) {
+private fun HomeDescription() {
     Column(
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
@@ -63,7 +65,7 @@ private fun HomeDescription(meowclopediaAppState: MeowclopediaApp) {
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TitleText(text = "About Cats")
+            TitleText(text = stringResource(id = R.string.home_about_cats_title))
             Spacer(modifier = Modifier.width(12.dp))
             Icon(imageVector = Icons.Filled.Info, contentDescription = null)
         }
@@ -72,7 +74,7 @@ private fun HomeDescription(meowclopediaAppState: MeowclopediaApp) {
             text = stringResource(id = R.string.home_about_cats)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        TitleText(text = "Origin and history of cats")
+        TitleText(text = stringResource(id = R.string.home_origin_and_history_of_cats_title))
         Text(text = stringResource(id = R.string.home_origin_cats))
     }
 }

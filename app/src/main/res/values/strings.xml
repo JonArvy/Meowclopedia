@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">Meowclopedia</string>
+
+    <string name="home_about_cats">
+        Cat, (Felis catus), domesticated member of the family Felidae, order Carnivora, and the smallest member of that family. Like all felids, domestic cats are characterized by supple low-slung bodies, finely molded heads, long tails that aid in balance, and specialized teeth and claws that adapt them admirably to a life of active hunting. Cats possess other features of their wild relatives in being basically carnivorous, remarkably agile and powerful, and finely coordinated in movement.
+        It is noteworthy that the ancestors of the other common household pet, the dog, were social animals that lived together in packs in which there was subordination to a leader, and the dog has readily transferred its allegiance from pack leader to human master. The cat, however, has not yielded as readily to subjugation. Consequently, the house cat is able to revert to complete self-reliance more quickly and more successfully than most domesticated dogs. For an account of the relationship of the family of cats to other carnivores.
+    </string>
+    <string name="home_origin_cats">
+        The “cat pattern,” established very early in the evolution of modern mammals, was a successful one: early cats were already typical in form at a time when the ancestors of most other modern mammalian types were scarcely recognizable. They first appeared in the early Pliocene Epoch (5.3 to 3.6 million years ago), and they have continued with remarkably little change into modern times.
+    </string>
+    <string name="home_about_cats_title">About Cats</string>
+    <string name="home_origin_and_history_of_cats_title">Origin and history of cats</string>
+
+    <string name="trivia_title">Cat Trivia</string>
+
+    <string name="more_change_color_scheme_title">Color Scheme</string>
+    <string name="more_change_color_scheme_subtitle">Change color scheme for a new look</string>
+
+    <string name="more_change_mode_title">Change Mode</string>
+    <string name="more_change_mode_subtitle">Choose between light mode and dark mode</string>
+
+    <string name="more_choice_default">Default</string>
+    <string name="more_choice_green">Green</string>
+    <string name="more_choice_lavender">Lavender</string>
+
+    <string name="more_choice_system">System</string>
+    <string name="more_choice_light">Light</string>
+    <string name="more_choice_dark">Dark</string>
+
+    <string name="cat_info_swipe_to_view_other_images">Swipe the screen to view other images</string>
+
+    <string name="cat_info_view_images">View Images</string>
+    <string name="cat_info_show_info">Show Info</string>
+    <string name="cat_info_breed_info">Breed Information</string>
+    <string name="cat_info_name">Name: </string>
+    <string name="cat_info_origin">Origin: </string>
+    <string name="cat_info_size">Size: </string>
+    <string name="cat_info_coat">Coat: </string>
+    <string name="cat_info_life_span">Life span: </string>
+    <string name="cat_info_weight">Weight: </string>
+    <string name="cat_info_colors">Colors: </string>
+    <string name="cat_info_overview">Overview</string>
 </resources>

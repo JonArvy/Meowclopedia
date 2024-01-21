@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
@@ -58,14 +60,15 @@ import sz.sapphirex.meowclopedia.ui.composables.labels.TitleText
 @Composable
 fun CatInfoScreen(
     meowclopediaAppState: MeowclopediaApp,
-    id: String? = null
+    id: Int
 ) {
     var visibleInfo by remember { mutableStateOf(true) }
     var fullFloatVisibility by remember { mutableStateOf(false) }
     val snackBarHostState = remember { SnackbarHostState() }
-    val catData = catData[id?.toInt() ?: 0]
+    val catData = meowclopediaAppState.catListReference.first { it.id == id}
     val lazyState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+    val text = stringResource(id = R.string.cat_info_swipe_to_view_other_images)
     Scaffold(
         topBar = { CatInfoTopBar(meowclopediaAppState = meowclopediaAppState) },
         floatingActionButton = {
@@ -75,7 +78,7 @@ fun CatInfoScreen(
                     visibleInfo = !visibleInfo
                     coroutineScope.launch {
                         if (!visibleInfo) {
-                            snackBarHostState.showSnackbar("Swipe the screen to view other images")
+                            snackBarHostState.showSnackbar(text)
                         }
                     }
                 }
@@ -89,7 +92,10 @@ fun CatInfoScreen(
                     AnimatedVisibility(
                         visible = fullFloatVisibility,
                     ) {
-                        Text(text = if (visibleInfo) "View Images" else "Show Info")
+                        Text(
+                            text = if (visibleInfo) stringResource(id = R.string.cat_info_view_images)
+                            else stringResource(id = R.string.cat_info_show_info)
+                        )
                     }
                 }
             }
@@ -141,21 +147,21 @@ fun CatInfo(catData: Cat) {
     ) {
         val titleWidth = .2f
 
-        TitleText(text = "Breed Information")
+        TitleText(text = stringResource(id = R.string.cat_info_breed_info))
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabel(title = "Name: ", value = catData.name, titleWidthSize = titleWidth)
+        HorizontalTextLabel(title = stringResource(id = R.string.cat_info_name), value = catData.name, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabel(title = "Origin: ", value = catData.origin.originValue, titleWidthSize = titleWidth)
+        HorizontalTextLabel(title = stringResource(id = R.string.cat_info_origin), value = catData.origin.originValue, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabel(title = "Size: ", value = catData.size.sizeValue, titleWidthSize = titleWidth)
+        HorizontalTextLabel(title = stringResource(id = R.string.cat_info_size), value = catData.size.sizeValue, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabelList(title = "Coat: ", values = catData.coat.map { it.coatValue }, titleWidthSize = titleWidth)
+        HorizontalTextLabelList(title = stringResource(id = R.string.cat_info_coat), values = catData.coat.map { it.coatValue }, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabel(title = "Life span: ", value = catData.lifeSpan, titleWidthSize = titleWidth)
+        HorizontalTextLabel(title = stringResource(id = R.string.cat_info_life_span), value = catData.lifeSpan, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabel(title = "Weight: ", value = catData.weight, titleWidthSize = titleWidth)
+        HorizontalTextLabel(title = stringResource(id = R.string.cat_info_weight), value = catData.weight, titleWidthSize = titleWidth)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
-        HorizontalTextLabelList(title = "Colors: ", values = catData.color.map { it.colorValue }, titleWidthSize = titleWidth)
+        HorizontalTextLabelList(title = stringResource(id = R.string.cat_info_colors), values = catData.color.map { it.colorValue }, titleWidthSize = titleWidth)
 
         Spacer(modifier = Modifier.padding(vertical = 16.dp))
 
@@ -163,7 +169,7 @@ fun CatInfo(catData: Cat) {
 
         Spacer(modifier = Modifier.padding(vertical = 16.dp))
 
-        TitleText(text = "Overview")
+        TitleText(text = stringResource(id = R.string.cat_info_overview))
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
         Text(text = catData.description)
 
@@ -182,6 +188,8 @@ fun CatInfoScreenBackground(
     val pagerState = rememberPagerState {
         catImages.catImages.size
     }
+
+    Image(painter = painterResource(id = R.drawable.splash_02), contentDescription = null, contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
     HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize(), userScrollEnabled = !automaticPageControl) { imageId ->
         BoxWithConstraints {
             val height by animateDpAsState(if (automaticPageControl) maxHeight else maxHeight / 3, label = "")

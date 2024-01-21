@@ -3,6 +3,7 @@ package sz.sapphirex.meowclopedia.ui.bottomnav
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -45,14 +47,14 @@ fun DexScreen(
     meowclopediaAppState: MeowclopediaApp,
     dexScreenViewModel: DexScreenViewModel = viewModel()
 ) {
-    var isRowCard by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf(meowclopediaAppState.getSearchToken()) }
+    dexScreenViewModel.fetchCats()
+    var text by remember { mutableStateOf(meowclopediaAppState.searchToken) }
     Box(modifier = Modifier
         .fillMaxSize()
     ) {
+        Image(painter = painterResource(id = R.drawable.splash_02), contentDescription = null, contentScale = ContentScale.FillBounds, modifier = Modifier.fillMaxSize())
         Column {
             DexScreenTopBar(
-                onToggleRowCard = { isRowCard = !isRowCard},
                 text = text
             ) {
                 meowclopediaAppState.setSearchToken(it)
@@ -60,7 +62,6 @@ fun DexScreen(
             }
             DexScreenContent(
                 meowclopediaAppState = meowclopediaAppState,
-                isRowCard = isRowCard,
                 searchQuery = text,
                 viewModel = dexScreenViewModel
             )
@@ -69,11 +70,16 @@ fun DexScreen(
 }
 
 @Composable
-private fun DexScreenContent(meowclopediaAppState: MeowclopediaApp, isRowCard: Boolean, searchQuery: String, viewModel: DexScreenViewModel) {
+private fun DexScreenContent(
+    meowclopediaAppState: MeowclopediaApp,
+    searchQuery: String,
+    viewModel: DexScreenViewModel
+) {
     val catResult by viewModel.catResult
     when (catResult) {
         is DataResult.Success -> {
             val catData = (catResult as DataResult.Success<List<Cat>>).data
+            meowclopediaAppState.catListReference = catData
             val filteredCatData = catData.filter {
                 it.name.contains(searchQuery, ignoreCase = true) ||
                         it.origin.originValue.contains(searchQuery, ignoreCase = true)
@@ -91,7 +97,6 @@ private fun DexScreenContent(meowclopediaAppState: MeowclopediaApp, isRowCard: B
                                 .padding(horizontal = 16.dp, vertical = 8.dp),
                             elevation = cardElevation(defaultElevation = 6.dp),
                             image = cat.images.catImages[0],
-                            isRowCard = isRowCard,
                             onClick = {
                                 meowclopediaAppState.navigateToCatInfo(cat.id)
                             }
@@ -112,13 +117,11 @@ private fun DexScreenContent(meowclopediaAppState: MeowclopediaApp, isRowCard: B
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                isRowCard = isRowCard
             )
             CatCardSkeleton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth(),
-                isRowCard = isRowCard
             )
         }
     }
@@ -126,7 +129,7 @@ private fun DexScreenContent(meowclopediaAppState: MeowclopediaApp, isRowCard: B
 }
 
 @Composable
-private fun DexScreenTopBar(onToggleRowCard: (() -> Unit)? = null, text: String, textChange: (String) -> Unit) {
+private fun DexScreenTopBar(text: String, textChange: (String) -> Unit) {
     var isSearching by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
